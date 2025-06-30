@@ -16,7 +16,7 @@ class ImageUpload extends FileUpload
 
     public static function make(?string $name = null): static
     {
-        return static::make($name)
+        return FileUpload::make($name)
             ->imageEditor()
             ->image()
             ->optimize('webp')
@@ -107,11 +107,11 @@ class ImageUpload extends FileUpload
 
                 if (
                     $component->shouldMoveFiles() &&
-                    ($component->getDiskName() == (fn (): string => $this->disk)->call($file))
+                    ($component->getDiskName() == (fn(): string => $this->disk)->call($file))
                 ) {
                     $newPath = trim($component->getDirectory() . '/' . $component->getUploadedFileNameForStorage($file), '/');
 
-                    $component->getDisk()->move((fn (): string => $this->path)->call($file), $newPath);
+                    $component->getDisk()->move((fn(): string => $this->path)->call($file), $newPath);
 
                     return $newPath;
                 }
