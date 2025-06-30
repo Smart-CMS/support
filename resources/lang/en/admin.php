@@ -11,4 +11,9 @@ return [
     'slug' => 'Slug',
     'views' => 'Views',
     'view' => 'View',
+    'sorting' => 'Sorting',
+    'save_close' => 'Save & Close',
+    'save' => 'Save',
+    'clear' => 'Clear',
+    'generate' => 'Generate',
 ];
