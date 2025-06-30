@@ -1,0 +1,81 @@
+{
+    "name": "smart-cms/support",
+    "description": "This is my package support",
+    "keywords": [
+        "SmartCms",
+        "laravel",
+        "filamentphp",
+        "support"
+    ],
+    "homepage": "https://github.com/smart-cms/support",
+    "support": {
+        "issues": "https://github.com/smart-cms/support/issues",
+        "source": "https://github.com/smart-cms/support"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "maxboyko",
+            "email": "maxboiko@divotek.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "filament/filament": "^4.0",
+        "spatie/laravel-package-tools": "^1.15.0",
+        "intervention/image": "^2.7",
+        "lorisleiva/laravel-actions": "^2.8"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^8.0",
+        "orchestra/testbench": "^9.0|^10.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-arch": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "pestphp/pest-plugin-livewire": "^3.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SmartCms\\Support\\": "src/",
+            "SmartCms\\Support\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmartCms\\Support\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "phpstan analyse",
+        "lint": "pint",
+        "test": "pest",
+        "test:lint": "pint --test"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SmartCms\\Support\\SupportServiceProvider"
+            ],
+            "aliases": {
+                "Support": "SmartCms\\Support\\Facades\\Support"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
