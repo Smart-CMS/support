@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Components\Layout;
+namespace SmartCms\Support\Admin\Components\Layout;
 
 use Filament\Schemas\Components\Section;
 use SmartCms\Support\Admin\Components\Forms\CreatedAt;
@@ -19,6 +19,6 @@ class Aside
             $schema[] = StatusField::make();
         }
 
-        return Section::make($schema);
+        return Section::make($schema)->columnSpan(1)->hiddenOn('create');
     }
 }
