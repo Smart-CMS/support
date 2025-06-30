@@ -18,6 +18,7 @@ class Aside
         if ($isStatus) {
             $schema[] = StatusField::make();
         }
-        return   Section::make($schema);
+
+        return Section::make($schema);
     }
 }

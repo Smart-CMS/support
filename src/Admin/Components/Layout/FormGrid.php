@@ -8,7 +8,7 @@ class FormGrid
 {
     public static function make(array $schema)
     {
-        return  Grid::make()
+        return Grid::make()
             ->gridContainer()
             ->columns([
                 '@md' => 3,
