@@ -11,6 +11,6 @@ class NameColumn
 
     public static function make(string $name = 'name'): TextColumn
     {
-        return TextColumn::make('name')->limit(self::LIMIT)->tooltip(fn (Model $record): string => strlen($record->name) > self::LIMIT ? $record->name : null)->searchable()->label(__('support::admin.name'));
+        return TextColumn::make('name')->limit(self::LIMIT)->tooltip(fn(Model $record): ?string => strlen($record->name) > self::LIMIT ? $record->name : null)->searchable()->label(__('support::admin.name'));
     }
 }
