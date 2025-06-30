@@ -10,7 +10,7 @@ use Intervention\Image\ImageManagerStatic as InterventionImage;
 use League\Flysystem\UnableToCheckFileExistence;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
-class ImageUpload extends FileUpload
+class ImageUpload
 {
     protected ?string $optimize = null;
 
