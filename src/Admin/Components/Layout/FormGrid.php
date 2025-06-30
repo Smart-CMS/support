@@ -4,16 +4,14 @@ namespace SmartCms\Support\Admin\Components\Layout;
 
 use Filament\Schemas\Components\Grid;
 
-class FormGrid
+class FormGrid extends Grid
 {
-    public static function make(array $schema): Grid
+    protected function setUp(): void
     {
-        return Grid::make()
-            ->gridContainer()
+        $this->gridContainer()
             ->columns([
                 '@md' => 3,
-                '@xl' => 3,
-            ])
-            ->schema($schema);
+                '@xl' => 4,
+            ])->columnSpanFull();
     }
 }
