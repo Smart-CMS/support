@@ -6,7 +6,7 @@ use Filament\Schemas\Components\Grid;
 
 class FormGrid
 {
-    public static function make(array $schema)
+    public static function make(array $schema): Grid
     {
         return Grid::make()
             ->gridContainer()

@@ -19,7 +19,6 @@ class ImageUpload extends FileUpload
         return FileUpload::make($name)
             ->imageEditor()
             ->image()
-            ->optimize('webp')
             ->openable(true)
             ->reorderable()
             ->imageEditorAspectRatios([
