@@ -23,7 +23,7 @@ trait InteractsWithSitemap
 
     public function updateSitemap(): void
     {
-        if (!$this->shouldUpdateSitemap()) {
+        if (! $this->shouldUpdateSitemap()) {
             return;
         }
 

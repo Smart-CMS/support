@@ -26,6 +26,7 @@ class SaveAndClose
                     $page->save(true, true);
                     $page->record->touch();
                 }
+
                 return redirect()->to($url);
             });
     }

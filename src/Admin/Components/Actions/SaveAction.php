@@ -22,6 +22,7 @@ class SaveAction
                         ->title(__('core::admin.saved'))
                         ->success()
                         ->send();
+
                     return;
                 }
                 $page->save(true, true);

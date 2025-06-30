@@ -14,13 +14,13 @@ trait HasSlug
     protected static function bootHasSlug(): void
     {
         static::creating(function (Model $model) {
-            if (!$model->slug) {
+            if (! $model->slug) {
                 $model->slug = Str::slug($model->{$model->slugReferenceColumn()});
             }
         });
 
         static::updating(function (Model $model) {
-            if (!$model->slug) {
+            if (! $model->slug) {
                 $model->slug = Str::slug($model->{$model->slugReferenceColumn()});
             }
         });
@@ -30,7 +30,6 @@ trait HasSlug
     {
         return 'name';
     }
-
 
     public function getSlugColumn(): string
     {

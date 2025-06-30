@@ -2,8 +2,6 @@
 
 namespace SmartCms\Support\Microdata;
 
-use SmartCms\Support\Microdata\MicrodataInterface;
-
 class Breadcrumbs implements MicrodataInterface
 {
     public static function make(...$args): self

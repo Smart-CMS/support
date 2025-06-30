@@ -2,7 +2,6 @@
 
 namespace SmartCms\Support\Microdata;
 
-
 class Website implements MicrodataInterface
 {
     public static function make(...$args): self

@@ -31,6 +31,6 @@ class SlugField
                         $name = $get('name') ?? '';
                         $set('slug', Str::slug($name));
                     }),
-            ]);;
+            ]);
     }
 }

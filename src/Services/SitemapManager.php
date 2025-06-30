@@ -2,12 +2,13 @@
 
 namespace SmartCms\Support\Services;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
 
 class SitemapManager
 {
     protected string $sitemapPath;
+
     protected array $config;
 
     public function __construct()
@@ -25,9 +26,11 @@ class SitemapManager
             case 'created':
             case 'updated':
                 $this->addOrUpdateEntry($model);
+
                 break;
             case 'deleted':
                 $this->removeEntry($model);
+
                 break;
         }
 
@@ -39,7 +42,7 @@ class SitemapManager
      */
     protected function addOrUpdateEntry($model)
     {
-        if (!$model->shouldBeInSitemap()) {
+        if (! $model->shouldBeInSitemap()) {
             return;
         }
 
