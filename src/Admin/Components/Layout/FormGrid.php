@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Components\Layout;
+namespace SmartCms\Support\Admin\Components\Layout;
 
 use Filament\Schemas\Components\Grid;
 
