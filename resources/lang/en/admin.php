@@ -16,4 +16,10 @@ return [
     'save' => 'Save',
     'clear' => 'Clear',
     'generate' => 'Generate',
+    'settings' => 'Settings',
+    'image' => 'Image',
+    'size' => 'Size',
+    'alt' => 'Alt',
+    'width' => 'Width',
+    'height' => 'Height',
 ];
