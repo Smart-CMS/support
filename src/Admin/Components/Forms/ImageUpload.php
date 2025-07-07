@@ -52,7 +52,7 @@ class ImageUpload
                 ->imageCropAspectRatio('16:9')
                 ->live()
                 ->afterStateUpdated(function (Set $set, $state, Get $get) use ($name) {
-                    if (!$state instanceof TemporaryUploadedFile) {
+                    if (! $state instanceof TemporaryUploadedFile) {
                         return;
                     }
                     $image = InterventionImage::make($state->getRealPath());
@@ -85,9 +85,10 @@ class ImageUpload
                         })
                         ->fillForm(function (Get $get, Set $set) use ($name): array {
                             $data = $get($name) ?? [];
+
                             return $data;
                         })
-                        ->visible(fn(Get $get) => $get($name . '.source'))
+                        ->visible(fn (Get $get) => $get($name . '.source'))
                 )
                 ->saveUploadedFileUsing(static function (BaseFileUpload $component, TemporaryUploadedFile $file): ?string {
                     try {
@@ -166,11 +167,11 @@ class ImageUpload
 
                     if (
                         $component->shouldMoveFiles() &&
-                        ($component->getDiskName() == (fn(): string => $this->disk)->call($file))
+                        ($component->getDiskName() == (fn (): string => $this->disk)->call($file))
                     ) {
                         $newPath = trim($component->getDirectory() . '/' . $component->getUploadedFileNameForStorage($file), '/');
 
-                        $component->getDisk()->move((fn(): string => $this->path)->call($file), $newPath);
+                        $component->getDisk()->move((fn (): string => $this->path)->call($file), $newPath);
 
                         return $newPath;
                     }

@@ -10,7 +10,6 @@ use Filament\Forms\FormsServiceProvider;
 use Filament\Infolists\InfolistsServiceProvider;
 use Filament\Notifications\NotificationsServiceProvider;
 use Filament\Schemas\SchemasServiceProvider;
-use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -31,7 +30,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn(string $modelName) => 'SmartCms\\Support\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'SmartCms\\Support\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
