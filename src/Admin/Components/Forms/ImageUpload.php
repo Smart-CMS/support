@@ -51,23 +51,23 @@ class ImageUpload
                 ->imageResizeMode('cover')
                 ->imageCropAspectRatio('16:9')
                 ->live()
-                ->afterStateUpdated(function (Set $set, $state, Get $get) {
-                    if (! $state instanceof TemporaryUploadedFile) {
+                ->afterStateUpdated(function (Set $set, $state, Get $get) use ($name) {
+                    if (!$state instanceof TemporaryUploadedFile) {
                         return;
                     }
                     $image = InterventionImage::make($state->getRealPath());
-                    $set('image.width', $image->width());
-                    $set('image.height', $image->height());
+                    $set($name . '.width', $image->width());
+                    $set($name . '.height', $image->height());
                     foreach (app('lang')->adminLanguages() as $lang) {
-                        $prev = $get('image.' . $lang->slug) ?? null;
+                        $prev = $get($name . '.' . $lang->slug) ?? null;
                         if ($prev) {
                             continue;
                         }
-                        $set('image.' . $lang->slug, $state->getClientOriginalName());
+                        $set($name . '.' . $lang->slug, $state->getClientOriginalName());
                     }
                 })
                 ->hintAction(
-                    Action::make('settings')->label(__('support::admin.settings'))->icon(Heroicon::OutlinedCog8Tooth)->slideOver()->schema(function (Schema $form, Get $get) {
+                    Action::make($name . '_settings')->label(__('support::admin.settings'))->icon(Heroicon::OutlinedCog8Tooth)->slideOver()->schema(function (Schema $form, Get $get) {
                         return $form->schema([
                             Section::make(__('support::admin.alt'))->schema(app('lang')->adminLanguages()->map(function ($lang) {
                                 return TextInput::make($lang->slug)->label($lang->name);
@@ -78,17 +78,16 @@ class ImageUpload
                             ]),
                         ]);
                     })
-                        ->action(function (array $data, Set $set, Get $get) {
+                        ->action(function (array $data, Set $set, Get $get) use ($name) {
                             foreach ($data as $key => $value) {
-                                $set('image.' . $key, $value);
+                                $set($name . '.' . $key, $value);
                             }
                         })
-                        ->fillForm(function (Get $get, Set $set): array {
-                            $data = $get('image') ?? [];
-
+                        ->fillForm(function (Get $get, Set $set) use ($name): array {
+                            $data = $get($name) ?? [];
                             return $data;
                         })
-                        ->visible(fn (Get $get) => $get('image.source'))
+                        ->visible(fn(Get $get) => $get($name . '.source'))
                 )
                 ->saveUploadedFileUsing(static function (BaseFileUpload $component, TemporaryUploadedFile $file): ?string {
                     try {
@@ -167,11 +166,11 @@ class ImageUpload
 
                     if (
                         $component->shouldMoveFiles() &&
-                        ($component->getDiskName() == (fn (): string => $this->disk)->call($file))
+                        ($component->getDiskName() == (fn(): string => $this->disk)->call($file))
                     ) {
                         $newPath = trim($component->getDirectory() . '/' . $component->getUploadedFileNameForStorage($file), '/');
 
-                        $component->getDisk()->move((fn (): string => $this->path)->call($file), $newPath);
+                        $component->getDisk()->move((fn(): string => $this->path)->call($file), $newPath);
 
                         return $newPath;
                     }
@@ -189,8 +188,8 @@ class ImageUpload
 
     public function optimize(string | Closure | null $optimize): static
     {
-        $this->optimize = $optimize;
-        $this->image();
+        // $this->optimize = $optimize;
+        // $this->image();
 
         return $this;
     }

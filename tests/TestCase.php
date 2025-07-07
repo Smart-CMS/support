@@ -19,7 +19,7 @@ use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use SmartCms\Support\SupportServiceProvider;
+use SmartCms\Support\SupportServiceProvider as SmartCmsSupportServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -31,7 +31,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'SmartCms\\Support\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn(string $modelName) => 'SmartCms\\Support\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -48,10 +48,9 @@ class TestCase extends Orchestra
             LivewireServiceProvider::class,
             NotificationsServiceProvider::class,
             SchemasServiceProvider::class,
-            SupportServiceProvider::class,
+            SmartCmsSupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            SupportServiceProvider::class,
         ];
 
         sort($providers);
