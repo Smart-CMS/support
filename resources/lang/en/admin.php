@@ -22,4 +22,6 @@ return [
     'alt' => 'Alt',
     'width' => 'Width',
     'height' => 'Height',
+    'template' => 'Template',
+    'saved' => 'Saved',
 ];

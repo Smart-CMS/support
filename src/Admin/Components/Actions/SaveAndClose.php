@@ -19,7 +19,7 @@ class SaveAndClose
                 if (method_exists($page, 'getOwnerRecord')) {
                     $page->getOwnerRecord()->touch();
                     Notification::make('saved')
-                        ->title(__('core::admin.saved'))
+                        ->title(__('support::admin.saved'))
                         ->success()
                         ->send();
                 } else {

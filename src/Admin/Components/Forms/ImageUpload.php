@@ -24,7 +24,7 @@ class ImageUpload
 {
     protected ?string $optimize = null;
 
-    public static function make(?string $name = null, string $directory = 'images'): Component
+    public static function make(?string $name = null, string $directory = 'images', ?string $label = null): Component
     {
         return Group::make()->schema([
             Hidden::make($name . '.width'),
@@ -33,7 +33,7 @@ class ImageUpload
             ...app('lang')->adminLanguages()->map(function ($lang) use ($name) {
                 return Hidden::make($name . '.' . $lang->slug);
             })->toArray(),
-            FileUpload::make($name . '.source')->label(__('support::admin.image'))
+            FileUpload::make($name . '.source')->label($label ?? $name)
                 ->imageEditor()
                 ->image()
                 ->openable(true)
@@ -88,7 +88,7 @@ class ImageUpload
 
                             return $data;
                         })
-                        ->visible(fn (Get $get) => $get($name . '.source'))
+                        ->visible(fn(Get $get) => $get($name . '.source'))
                 )
                 ->saveUploadedFileUsing(static function (BaseFileUpload $component, TemporaryUploadedFile $file): ?string {
                     try {
@@ -167,11 +167,11 @@ class ImageUpload
 
                     if (
                         $component->shouldMoveFiles() &&
-                        ($component->getDiskName() == (fn (): string => $this->disk)->call($file))
+                        ($component->getDiskName() == (fn(): string => $this->disk)->call($file))
                     ) {
                         $newPath = trim($component->getDirectory() . '/' . $component->getUploadedFileNameForStorage($file), '/');
 
-                        $component->getDisk()->move((fn (): string => $this->path)->call($file), $newPath);
+                        $component->getDisk()->move((fn(): string => $this->path)->call($file), $newPath);
 
                         return $newPath;
                     }

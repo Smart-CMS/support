@@ -14,13 +14,13 @@ trait HasSlug
     protected static function bootHasSlug(): void
     {
         static::creating(function (Model $model) {
-            if (! $model->slug) {
+            if (! $model->slug && $model->shouldGenerateSlug()) {
                 $model->slug = Str::slug($model->{$model->slugReferenceColumn()});
             }
         });
 
         static::updating(function (Model $model) {
-            if (! $model->slug) {
+            if (! $model->slug && $model->shouldGenerateSlug()) {
                 $model->slug = Str::slug($model->{$model->slugReferenceColumn()});
             }
         });
@@ -42,5 +42,10 @@ trait HasSlug
     public function scopeSlug(Builder $query, string $slug)
     {
         return $query->where($this->getSlugColumn(), $slug);
+    }
+
+    public function shouldGenerateSlug(): bool
+    {
+        return true;
     }
 }
