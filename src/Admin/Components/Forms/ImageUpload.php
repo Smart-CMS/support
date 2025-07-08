@@ -88,7 +88,7 @@ class ImageUpload
 
                             return $data;
                         })
-                        ->visible(fn(Get $get) => $get($name . '.source'))
+                        ->visible(fn (Get $get) => $get($name . '.source'))
                 )
                 ->saveUploadedFileUsing(static function (BaseFileUpload $component, TemporaryUploadedFile $file): ?string {
                     try {
@@ -167,11 +167,11 @@ class ImageUpload
 
                     if (
                         $component->shouldMoveFiles() &&
-                        ($component->getDiskName() == (fn(): string => $this->disk)->call($file))
+                        ($component->getDiskName() == (fn (): string => $this->disk)->call($file))
                     ) {
                         $newPath = trim($component->getDirectory() . '/' . $component->getUploadedFileNameForStorage($file), '/');
 
-                        $component->getDisk()->move((fn(): string => $this->path)->call($file), $newPath);
+                        $component->getDisk()->move((fn (): string => $this->path)->call($file), $newPath);
 
                         return $newPath;
                     }
