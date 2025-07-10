@@ -21,7 +21,7 @@ class SlugField
                     ->label(__('support::admin.clear'))
                     ->requiresConfirmation()
                     ->icon('heroicon-o-trash')
-                    ->action(function (Set $set, $state) {
+                    ->action(function (Set $set) {
                         $set('slug', null);
                     }),
                 Action::make('generate_slug')
@@ -29,7 +29,15 @@ class SlugField
                     ->icon('heroicon-o-arrow-path')
                     ->action(function (Set $set, $get) {
                         $name = $get('name') ?? '';
-                        $set('slug', Str::slug($name));
+                        $slug = "";
+                        if (is_string($name)) {
+                            $slug = Str::slug($name);
+                        }
+                        if (is_array($name)) {
+                            /**@phpstan-ignore-next-line */
+                            $slug = Str::slug($name[main_lang()]);
+                        }
+                        $set('slug', $slug);
                     }),
             ]);
     }
