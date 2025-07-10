@@ -4,8 +4,6 @@ namespace SmartCms\Support\Admin\Components\Forms;
 
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Width;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,18 +26,20 @@ class NameField
             })
             ->modalWidth(Width::TwoExtraLarge)
             ->badge(function ($record) use ($name) {
-                if (!$record) {
+                if (! $record) {
                     return 0;
                 }
+
                 return count($record->getTranslations($name)) - 1;
             })
             ->badgeColor(function ($record) use ($name) {
-                if (!$record) {
+                if (! $record) {
                     return 'danger';
                 }
                 if (count($record->getTranslations($name)) > 1) {
                     return 'info';
                 }
+
                 return 'danger';
             })
             ->icon(function (): string {

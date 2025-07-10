@@ -29,7 +29,7 @@ class SlugField
                     ->icon('heroicon-o-arrow-path')
                     ->action(function (Set $set, $get) {
                         $name = $get('name') ?? '';
-                        $slug = "";
+                        $slug = '';
                         if (is_string($name)) {
                             $slug = Str::slug($name);
                         }
